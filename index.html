@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор QR-кодов Author.Today</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-qrcode"></i> Генератор QR-кодов Author.Today</h1>
+            <p class="subtitle">Создайте QR-код для профиля Author.Today с аватаром пользователя в центре</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="url-input">
+                        <i class="fas fa-user"></i> Введите ссылку на профиль Author.Today:
+                    </label>
+                    <div class="input-with-example">
+                        <input type="url" id="url-input" 
+                               placeholder="https://author.today/u/username"
+                               value="https://author.today/u/andreipodvalny">
+                        <div class="examples">
+                            <p>Примеры:</p>
+                            <div class="example-links">
+                                <button class="example-btn" data-url="https://author.today/u/andreipodvalny">andreipodvalny</button>
+                                <button class="example-btn" data-url="https://author.today/u/nbnova">nbnova</button>
+                                <button class="example-btn" data-url="https://author.today/u/uriy17">uriy17</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button id="generate-btn" class="btn generate">
+                            <i class="fas fa-bolt"></i> Сгенерировать QR-код
+                        </button>
+                        <button id="download-btn" class="btn download" disabled>
+                            <i class="fas fa-download"></i> Скачать QR-код
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <p><strong>Как это работает:</strong></p>
+                        <p>1. Введите ссылку на профиль Author.Today (например: https://author.today/u/username)</p>
+                        <p>2. Система автоматически получит аватар пользователя из галереи профиля</p>
+                        <p>3. Сгенерирует QR-код с этим аватаром в центре</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <div class="qr-container">
+                    <h3><i class="fas fa-qrcode"></i> Ваш QR-код:</h3>
+                    <div id="qr-code"></div>
+                    <div id="loading" class="loading">
+                        <div class="spinner"></div>
+                        <p>Получаю аватар пользователя...</p>
+                        <p class="loading-details" id="loading-details"></p>
+                    </div>
+                    <div id="error" class="error-message"></div>
+                    
+                    <div class="qr-info" id="qr-info">
+                        <p><i class="fas fa-link"></i> <span id="qr-url"></span></p>
+                        <p><i class="fas fa-user"></i> <span id="qr-username"></span></p>
+                    </div>
+                </div>
+                
+                <div class="preview-logo">
+                    <h3><i class="fas fa-user-circle"></i> Аватар пользователя:</h3>
+                    <div class="logo-container">
+                        <div class="avatar-wrapper">
+                            <img id="logo-preview" src="" alt="Аватар пользователя">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="user-info">
+                            <p class="username" id="user-username">Не выбрано</p>
+                            <p class="profile-link" id="user-profile">—</p>
+                        </div>
+                    </div>
+                    
+                    <div class="avatar-source">
+                        <p><i class="fas fa-database"></i> <strong>Источник аватара:</strong></p>
+                        <p class="source-url" id="avatar-source">—</p>
+                        <p class="source-note">Автоматически извлекается из галереи профиля</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <h2><i class="fas fa-graduation-cap"></i> Инструкция:</h2>
+                <ol>
+                    <li>Вставьте ссылку на профиль Author.Today в формате: <code>https://author.today/u/username</code></li>
+                    <li>Нажмите "Сгенерировать QR-код"</li>
+                    <li>Система автоматически найдет аватар пользователя в его галерее</li>
+                    <li>Скачайте готовый QR-код с аватаром в центре</li>
+                </ol>
+                
+                <div class="note">
+                    <p><strong>Примечание:</strong> Для работы требуется доступ в интернет. Аватар загружается из публичной галереи профиля пользователя.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2023 Генератор QR-кодов для Author.Today</p>
+            <p class="footer-note">Специально разработан для работы с профилями Author.Today</p>
+        </footer>
+    </div>
+
+    <!-- Подключаем библиотеки -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
