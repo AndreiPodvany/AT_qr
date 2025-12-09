@@ -3,197 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Генератор QR-кодов Author.Today</title>
+    <title>Генератор QR-кодов</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-qrcode"></i> Генератор QR-кодов Author.Today</h1>
-            <p class="subtitle">Создайте QR-код для любой ссылки с выбранным изображением в центре</p>
-        </header>
+        <!-- Левая панель - настройки -->
+        <div class="settings-panel">
+            <div class="logo">
+                <i class="fas fa-qrcode"></i>
+                <h1>QR Генератор</h1>
+                <p class="tagline">Создавайте красивые QR-коды с логотипами</p>
+            </div>
 
-        <main>
-            <div class="input-section">
+            <div class="settings-section">
+                <h2><i class="fas fa-link"></i> Ссылка</h2>
                 <div class="input-group">
-                    <label for="url-input">
-                        <i class="fas fa-link"></i> Введите ссылку для QR-кода:
-                    </label>
-                    <input type="url" id="url-input" 
-                           placeholder="https://author.today/u/username"
-                           value="https://author.today/u/andreipodvalny">
-                    
-                    <div class="image-options">
-                        <h3><i class="fas fa-image"></i> Выберите изображение для центра:</h3>
-                        
-                        <div class="options-container">
-                            <!-- Опция 1: Загрузить свое изображение -->
-                            <div class="option-card" id="option-custom">
-                                <div class="option-header">
-                                    <input type="radio" name="image-option" id="radio-custom" value="custom">
-                                    <label for="radio-custom">
-                                        <i class="fas fa-upload"></i>
-                                        <span class="option-title">Загрузить своё изображение</span>
-                                    </label>
-                                </div>
-                                <div class="option-content" id="custom-content">
-                                    <div class="file-upload">
-                                        <input type="file" id="file-input" accept="image/*">
-                                        <label for="file-input" class="file-label">
-                                            <i class="fas fa-cloud-upload-alt"></i>
-                                            <span>Выберите файл (PNG, JPG, SVG)</span>
-                                        </label>
-                                        <div class="file-info" id="file-info"></div>
-                                    </div>
-                                    <div class="preview-container">
-                                        <div class="preview-placeholder" id="custom-preview-placeholder">
-                                            <i class="fas fa-image"></i>
-                                            <p>Превью появится здесь</p>
-                                        </div>
-                                        <img id="custom-preview" class="hidden" alt="Ваше изображение">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Опция 2: Использовать иконку Author.Today -->
-                            <div class="option-card" id="option-icon">
-                                <div class="option-header">
-                                    <input type="radio" name="image-option" id="radio-icon" value="icon" checked>
-                                    <label for="radio-icon">
-                                        <i class="fas fa-book"></i>
-                                        <span class="option-title">Иконка Author.Today</span>
-                                    </label>
-                                </div>
-                                <div class="option-content" id="icon-content">
-                                    <div class="preview-container">
-                                        <img src="https://ideas.author.today/static/images/logos/smNkD4BSL0z1hQIvCkPnhCk79Pr7im7r7JigePK2VUzT2471OxjxYqnkQITbr6UX-logo-1024.png?size=100" 
-                                             id="icon-preview" alt="Иконка Author.Today">
-                                    </div>
-                                    <p class="option-description">
-                                        Использовать стандартную иконку Author.Today
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <!-- Опция 3: Использовать логотип сайта -->
-                            <div class="option-card" id="option-logo">
-                                <div class="option-header">
-                                    <input type="radio" name="image-option" id="radio-logo" value="logo">
-                                    <label for="radio-logo">
-                                        <i class="fas fa-globe"></i>
-                                        <span class="option-title">Логотип сайта (Favicon)</span>
-                                    </label>
-                                </div>
-                                <div class="option-content" id="logo-content">
-                                    <div class="preview-container">
-                                        <img src="https://author.today/favicon.ico" 
-                                             id="logo-preview" alt="Логотип Author.Today">
-                                    </div>
-                                    <p class="option-description">
-                                        Использовать favicon сайта Author.Today
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="button-group">
-                        <button id="generate-btn" class="btn generate">
-                            <i class="fas fa-bolt"></i> Сгенерировать QR-код
+                    <textarea id="url-input" 
+                              placeholder="Вставьте ссылку..."
+                              rows="3">https://author.today/u/andreipodvalny</textarea>
+                    <div class="input-footer">
+                        <span class="char-count" id="char-count">0</span>
+                        <button class="clear-btn" id="clear-btn" title="Очистить">
+                            <i class="fas fa-times"></i>
                         </button>
-                        <button id="download-btn" class="btn download" disabled>
-                            <i class="fas fa-download"></i> Скачать QR-код
-                        </button>
-                        <button id="clear-btn" class="btn clear">
-                            <i class="fas fa-eraser"></i> Очистить
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="info-box">
-                    <i class="fas fa-info-circle"></i>
-                    <div>
-                        <p><strong>Как использовать:</strong></p>
-                        <p>1. Вставьте ссылку для QR-кода</p>
-                        <p>2. Выберите изображение для центра из трёх вариантов</p>
-                        <p>3. Нажмите "Сгенерировать QR-код"</p>
-                        <p>4. Скачайте готовый QR-код</p>
                     </div>
                 </div>
             </div>
 
-            <div class="output-section">
-                <div class="qr-container">
-                    <h3><i class="fas fa-qrcode"></i> Ваш QR-код:</h3>
-                    <div id="qr-code"></div>
-                    <div id="loading" class="loading">
-                        <div class="spinner"></div>
-                        <p>Генерация QR-кода...</p>
+            <div class="settings-section">
+                <h2><i class="fas fa-image"></i> Центральное изображение</h2>
+                <div class="image-options">
+                    <div class="option-card selected" data-option="logo">
+                        <div class="option-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="option-content">
+                            <h3>Логотип сайта</h3>
+                            <p>Иконка Author.Today</p>
+                        </div>
+                        <div class="option-check">
+                            <i class="fas fa-check"></i>
+                        </div>
                     </div>
-                    <div id="error" class="error-message"></div>
-                    
-                    <div class="qr-info">
-                        <p><i class="fas fa-link"></i> <span id="qr-url">Не сгенерировано</span></p>
-                        <p><i class="fas fa-image"></i> <span id="qr-image-type">Не выбрано</span></p>
+
+                    <div class="option-card" data-option="ideas">
+                        <div class="option-icon" style="background: #4CAF50;">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="option-content">
+                            <h3>Идеи Author.Today</h3>
+                            <p>Цветной логотип</p>
+                        </div>
+                        <div class="option-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+
+                    <div class="option-card" data-option="custom">
+                        <div class="option-icon" style="background: #FF9800;">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="option-content">
+                            <h3>Своё изображение</h3>
+                            <p>Загрузите с компьютера</p>
+                        </div>
+                        <div class="option-check">
+                            <i class="fas fa-check"></i>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="result-info">
-                    <h3><i class="fas fa-info-circle"></i> Информация о QR-коде:</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label">Статус:</div>
-                            <div class="info-value" id="status">Ожидание генерации</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Тип изображения:</div>
-                            <div class="info-value" id="image-type">Не выбрано</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Размер QR-кода:</div>
-                            <div class="info-value" id="qr-size">300×300 пикселей</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Время генерации:</div>
-                            <div class="info-value" id="generation-time">—</div>
-                        </div>
+
+                <div class="image-upload" id="image-upload" style="display: none;">
+                    <div class="upload-area" id="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Перетащите изображение сюда</p>
+                        <p class="upload-sub">или нажмите для выбора файла</p>
+                        <input type="file" id="file-input" accept="image/*" hidden>
                     </div>
-                    
-                    <div class="qr-tips">
-                        <h4><i class="fas fa-lightbulb"></i> Советы:</h4>
-                        <ul>
-                            <li>Для лучшего сканирования используйте контрастные изображения</li>
-                            <li>Размер изображения в центре не должен превышать 25% QR-кода</li>
-                            <li>PNG изображения обеспечивают лучший результат</li>
-                        </ul>
+                    <div class="file-info" id="file-info" style="display: none;">
+                        <div class="file-preview">
+                            <img id="file-preview" src="" alt="Предпросмотр">
+                        </div>
+                        <div class="file-details">
+                            <span id="file-name"></span>
+                            <button class="remove-file" id="remove-file">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="examples-section">
-                <h3><i class="fas fa-star"></i> Примеры ссылок для тестирования:</h3>
-                <div class="example-links">
-                    <button class="example-link" data-url="https://author.today">
-                        <i class="fas fa-home"></i> Главная Author.Today
+            <div class="settings-section">
+                <h2><i class="fas fa-palette"></i> Цвет QR-кода</h2>
+                <div class="color-options">
+                    <div class="color-option selected" data-color="#000000" style="background: #000000;"></div>
+                    <div class="color-option" data-color="#2196F3" style="background: #2196F3;"></div>
+                    <div class="color-option" data-color="#4CAF50" style="background: #4CAF50;"></div>
+                    <div class="color-option" data-color="#FF9800" style="background: #FF9800;"></div>
+                    <div class="color-option" data-color="#9C27B0" style="background: #9C27B0;"></div>
+                    <div class="color-option" data-color="#E91E63" style="background: #E91E63;"></div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="generate-btn" class="btn generate-btn">
+                    <i class="fas fa-magic"></i>
+                    <span>Сгенерировать QR-код</span>
+                </button>
+                <button id="download-btn" class="btn download-btn" disabled>
+                    <i class="fas fa-download"></i>
+                    <span>Скачать</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Правая панель - предпросмотр -->
+        <div class="preview-panel">
+            <div class="preview-header">
+                <h2><i class="fas fa-eye"></i> Предпросмотр</h2>
+                <div class="preview-controls">
+                    <button class="icon-btn" id="zoom-in" title="Увеличить">
+                        <i class="fas fa-search-plus"></i>
                     </button>
-                    <button class="example-link" data-url="https://author.today/u/andreipodvalny">
-                        <i class="fas fa-user"></i> Профиль andreipodvalny
+                    <button class="icon-btn" id="zoom-out" title="Уменьшить">
+                        <i class="fas fa-search-minus"></i>
                     </button>
-                    <button class="example-link" data-url="https://author.today/u/nbnova">
-                        <i class="fas fa-user"></i> Профиль nbnova
-                    </button>
-                    <button class="example-link" data-url="https://ideas.author.today">
-                        <i class="fas fa-lightbulb"></i> Ideas.Author.Today
+                    <button class="icon-btn" id="reset-zoom" title="Сбросить масштаб">
+                        <i class="fas fa-expand-alt"></i>
                     </button>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <p>© 2023 Генератор QR-кодов для Author.Today</p>
-            <p class="footer-note">Выберите своё изображение для центра QR-кода</p>
-        </footer>
+            <div class="preview-container">
+                <div class="qr-wrapper">
+                    <div id="qr-code" class="qr-code"></div>
+                    <div id="loading" class="loading-overlay">
+                        <div class="spinner">
+                            <div class="spinner-inner"></div>
+                        </div>
+                        <p>Создаём ваш QR-код...</p>
+                    </div>
+                    <div id="error" class="error-overlay">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p id="error-message"></p>
+                    </div>
+                </div>
+
+                <div class="preview-info">
+                    <div class="info-item">
+                        <i class="fas fa-link"></i>
+                        <div class="info-content">
+                            <span class="info-label">Ссылка:</span>
+                            <span id="preview-url" class="info-value">—</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-image"></i>
+                        <div class="info-content">
+                            <span class="info-label">Изображение:</span>
+                            <span id="preview-image" class="info-value">Логотип сайта</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-palette"></i>
+                        <div class="info-content">
+                            <span class="info-label">Цвет:</span>
+                            <span id="preview-color" class="info-value">Чёрный</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-footer">
+                <p class="hint">
+                    <i class="fas fa-lightbulb"></i>
+                    QR-код будет содержать введённую ссылку. Центральное изображение не влияет на его работу.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div id="notification" class="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-text"></span>
+        </div>
     </div>
 
     <!-- Подключаем библиотеки -->
